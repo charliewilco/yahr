@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render, fireEvent, waitForElement } from "@testing-library/react";
-import { renderHook, cleanup, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react-hooks";
 import "@testing-library/jest-dom/extend-expect";
 import storageMock from "./mocks/localstorage";
 import useLocalStorage from "../src/useLocalStorage";

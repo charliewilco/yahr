@@ -21,6 +21,7 @@
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-test-renderer": "^16.9.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
   },
@@ -42,6 +43,9 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts?(x)"
+    ]
   }
 }

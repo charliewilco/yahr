@@ -10,6 +10,20 @@ function tryDecode(s: string): string {
 
 const pairSplitRegExp: RegExp = /; */;
 
+interface StringTUMap<T, U> {
+  [key: string]: U;
+}
+
+function fromEntries<T, U>(iterable: Map<T | string, U>): object {
+  return [...iterable].reduce(
+    (obj: StringTUMap<string, U>, [key, val]: [string, U]) => {
+      obj[key] = val;
+      return obj;
+    },
+    {}
+  );
+}
+
 export function parseCookies(cookies: string): object {
   // this creates the cookie pair
   // ["key=value", "key=value", "key=value", "key=value"]
@@ -24,12 +38,21 @@ export function parseCookies(cookies: string): object {
   });
 
   // Converts map to object
-  return JSON.parse(JSON.stringify([...map]));
+  return fromEntries(map);
 }
 
 export function useCookies(key: string) {
-  const [state, setState] = React.useState("");
+  const [state, setState] = React.useState({});
+
+  React.useEffect(() => {
+    const cookies = parseCookies(document.cookie);
+
+    setState(prev => ({ ...prev, ...cookies }));
+  }, []);
+
   function setCookie() {}
 
   function getAllCookies() {}
+
+  return state;
 }
